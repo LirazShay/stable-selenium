@@ -19,7 +19,7 @@ namespace StableSelenium.Tests.WebElementTests
         [Test]
         public void Click_WhenElementClickableOnlyAfter3Sec_ShouldWork()
         {
-            CreateButtonNotClickableFor3Seconds();
+            CreateButtonNotClickableFor5Seconds();
             
             //Without the framework it should throw exception
             var ex = Assert.Throws<InvalidOperationException>(() => Driver.FindElement(By.CssSelector("button")).WrappedElement.Click());
@@ -213,10 +213,10 @@ namespace StableSelenium.Tests.WebElementTests
         }
 
 
-        private void CreateButtonNotClickableFor3Seconds()
+        private void CreateButtonNotClickableFor5Seconds()
         {
             string script = @"createButtonHiddenUnderAnotherDiv();
-                            setTimeout(removeTheDiv, 3000);
+                            setTimeout(removeTheDiv, 5000);
                             function createButtonHiddenUnderAnotherDiv() {
                                 document.body.innerHTML = '';
                                 var btn = document.createElement('button');
@@ -231,7 +231,7 @@ namespace StableSelenium.Tests.WebElementTests
                                 document.body.appendChild(btn);
                                 var div = document.createElement('div');
                                 div.id = 'hideBtnDiv';
-                                div.textContent = 'Hiding the button for 3 seconds';
+                                div.textContent = 'Hiding the button for 5 seconds';
                                 div.style.width = '100px';
                                 div.style.backgroundColor = 'red';
                                 div.style.position = 'absolute';
