@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using StableSelenium.Tests.Support;
-using System.Linq;
+using StableSelenium.Tests.TestUtils;
 
-namespace StableSelenium.Tests.WebElementTests
+namespace StableSelenium.Tests.IntegrationTests
 {
+    [Category("IntegrationTests")]
     [UseRealBrowser]
     [TestFixture]
     public class StableWebElementTests : TestBase

@@ -1,11 +1,10 @@
 ﻿using NUnit.Framework;
-using StableSelenium.Tests.WebDriverTests;
 using System;
 using System.Linq;
 using System.Reflection;
 
 
-namespace StableSelenium.Tests.Support
+namespace StableSelenium.Tests.TestUtils
 {
     [TestFixture]
     public class TestBase

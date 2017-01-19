@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using StableSelenium.Tests.Support;
+using StableSelenium.Tests.TestUtils;
+using StableSelenium.Tests.WebElementTests;
 using System;
 
-namespace StableSelenium.Tests.WebElementTests
+namespace StableSelenium.Tests.UnitTests
 {
-    [TestFixture, UseMockBrowser]
-    public class TestsToVerifyThatIWebElementMethodsStillWorkCorrect : TestBase
+    [TestFixture, UseMockBrowser, Category("UnitTests")]
+    public class StableWebElementTests : TestBase
     {
         [Test]
         public void Clear_WhenCalled_ShouldCallWrappedElementClear()

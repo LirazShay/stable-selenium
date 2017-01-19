@@ -1,7 +1,8 @@
 ﻿using OpenQA.Selenium.Chrome;
 using StableSelenium.Tests.Fakes;
 
-namespace StableSelenium.Tests.WebDriverTests
+
+namespace StableSelenium.Tests.TestUtils
 {
     public class StableWebDriverFactory
     {

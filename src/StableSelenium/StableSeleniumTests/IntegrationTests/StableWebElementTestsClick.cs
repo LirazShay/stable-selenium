@@ -1,13 +1,14 @@
 ﻿using System;
 using OpenQA.Selenium;
 using NUnit.Framework;
-using StableSelenium.Tests.Support;
+using StableSelenium.Tests.TestUtils;
 
-namespace StableSelenium.Tests.WebElementTests
+namespace StableSelenium.Tests.IntegrationTests
 {
+    [Category("IntegrationTests")]
     [UseRealBrowser]
     [TestFixture]
-    public class RetryOperationIfExceptionWasThrown : TestBase
+    public class StableWebElementTestsClick : TestBase
     {
         /// <summary>
         /// This test verifies that the exception Element Not Clickable at point 

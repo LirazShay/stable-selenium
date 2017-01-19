@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using StableSelenium.Tests.Support;
+using StableSelenium.Tests.TestUtils;
 
-namespace StableSelenium.Tests.PageObjectTests
+
+namespace StableSelenium.Tests.IntegrationTests
 {
+    [Category("IntegrationTests")]
     [TestFixture]
     public class PageObjectTests : TestBase
     {

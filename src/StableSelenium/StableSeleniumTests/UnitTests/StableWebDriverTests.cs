@@ -1,19 +1,20 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium.Internal;
-using StableSelenium.Tests.Support;
 using StableSelenium.Tests.Fakes;
+using StableSelenium.Tests.TestUtils;
 using System;
 
-namespace StableSelenium.Tests.WebDriverTests
+
+namespace StableSelenium.Tests.UnitTests
 {
-    [TestFixture]
+    [TestFixture, Category("UnitTests")]
     public class StableWebDriverTests  : TestBase
     {
         [Test]
         public void Ctor_WhenCalledWithoutConfiguration_ShouldCreateDefaultConfiguration()
         {
             var driver = new StableWebDriver(new FakeIWebDriverIJavaScriptExecutorITakesScreenshot());
-            var defaultConfig = DriverConfiguration.CreateDefaultConfiguration();
+            var defaultConfig = new DriverConfiguration();
             Assert.AreEqual(defaultConfig.ImplicitlyWaitTimeout, driver.DriverConfiguration.ImplicitlyWaitTimeout);
             Assert.AreEqual(defaultConfig.TimeoutToRetryClickIfFailed, driver.DriverConfiguration.TimeoutToRetryClickIfFailed);
             Assert.AreEqual(defaultConfig.TimeToWaitUntilElementClickable, driver.DriverConfiguration.TimeToWaitUntilElementClickable);
@@ -22,7 +23,7 @@ namespace StableSelenium.Tests.WebDriverTests
         [Test]
         public void Ctor_WhenCalledWithConfiguration_ShouldBeWithCorrectConfiguration()
         {
-            var config = DriverConfiguration.CreateDefaultConfiguration();
+            var config = new DriverConfiguration();
             config.ImplicitlyWaitTimeout = TimeSpan.FromDays(2);
             var driver = new StableWebDriver(new FakeIWebDriverIJavaScriptExecutorITakesScreenshot(), config);
             Assert.AreEqual(config.ImplicitlyWaitTimeout, driver.DriverConfiguration.ImplicitlyWaitTimeout);

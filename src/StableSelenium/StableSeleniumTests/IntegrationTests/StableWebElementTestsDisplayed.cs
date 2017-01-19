@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using StableSelenium.Tests.Support;
+using StableSelenium.Tests.TestUtils;
 using System;
 
-namespace StableSelenium.Tests.WebElementTests
+namespace StableSelenium.Tests.IntegrationTests
 {
     /// <summary>
     /// In Selenium, when calling webElement.Displayed
@@ -17,8 +17,8 @@ namespace StableSelenium.Tests.WebElementTests
     /// throw NoSuchElement, but when calling IWebElement method and the element
     /// does not exist - that method will throw it (for example -click/text)
     /// </summary>
-    [TestFixture,UseRealBrowser]
-    public class WebElementIsDisplayedTests  : TestBase
+    [TestFixture,UseRealBrowser,Category("IntegrationTests")]
+    public class StableWebElementTestsDisplayed  : TestBase
     {
         [Test]
         public void Displayed_WhenElementIsDisplayed_ShouldReturnTrue()

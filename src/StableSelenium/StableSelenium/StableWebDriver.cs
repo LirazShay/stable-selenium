@@ -19,7 +19,7 @@ namespace StableSelenium
         readonly IJavaScriptExecutor javaScriptExecutor;
         readonly ITakesScreenshot takesScreenshot;
 
-        public StableWebDriver(IWebDriver driver) : this(driver,DriverConfiguration.CreateDefaultConfiguration())
+        public StableWebDriver(IWebDriver driver) : this(driver, new DriverConfiguration())
         {
         }
 

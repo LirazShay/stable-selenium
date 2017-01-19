@@ -60,26 +60,26 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="PageObjectTests\BasePageObjectTests.cs" />
+    <Compile Include="IntegrationTests\BasePageObjectTests.cs" />
     <Compile Include="ParallelExecution.cs" />
-    <Compile Include="WebElementTests\WebElementFindElementTests.cs" />
-    <Compile Include="WebElementTests\TestsToVerifyThatIWebElementMethodsStillWorkCorrect.cs" />
+    <Compile Include="IntegrationTests\StableWebElementTestsFindElement.cs" />
+    <Compile Include="UnitTests\StableWebElementTests.cs" />
     <Compile Include="Fakes\FakeIWebDriverIJavaScriptExecutorITakesScreenshotIHasWebStorage.cs" />
     <Compile Include="Fakes\FakeIWebDriverIFindsById.cs" />
     <Compile Include="Fakes\IMock.cs" />
     <Compile Include="Fakes\FakeWebElement.cs" />
-    <Compile Include="WebElementTests\StaleElementReferenceExceptionHandlingTests.cs" />
-    <Compile Include="WebElementTests\StableWebElementTests.cs" />
-    <Compile Include="WebElementTests\RetryOperationIfExceptionWasThrown.cs" />
+    <Compile Include="IntegrationTests\StableWebElementTestsWrappedElement.cs" />
+    <Compile Include="IntegrationTests\StableWebElementTests.cs" />
+    <Compile Include="IntegrationTests\StableWebElementTestsClick.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fakes\FakeIWebDriverIJavaScriptExecutorITakesScreenshot.cs" />
-    <Compile Include="WebDriverTests\FindElementTests.cs" />
-    <Compile Include="WebDriverTests\StableWebDriverTests.cs" />
+    <Compile Include="IntegrationTests\StableWebDriverTestsFindElement.cs" />
+    <Compile Include="UnitTests\StableWebDriverTests.cs" />
     <Compile Include="Fakes\FakeIWebDriverNotITakesScreenshot.cs" />
     <Compile Include="Fakes\FakeIWebDriverOnly.cs" />
-    <Compile Include="WebDriverTests\StableWebDriverFactory.cs" />
-    <Compile Include="Support\TestBase.cs" />
-    <Compile Include="WebElementTests\WebElementIsDisplayedTests.cs" />
+    <Compile Include="TestUtils\StableWebDriverFactory.cs" />
+    <Compile Include="TestUtils\TestBase.cs" />
+    <Compile Include="IntegrationTests\StableWebElementTestsDisplayed.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StableSelenium\StableSelenium.csproj">
@@ -92,18 +92,19 @@
       <Link>chromedriver.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WebElementTests\Scripts\CreateButtonNotVisible.js" />
-    <Content Include="WebElementTests\Scripts\CreateButtonVisibleAfter3Seconds.js" />
-    <Content Include="WebElementTests\Scripts\CreateButtonNotClickableAtPoint.js" />
-    <Content Include="WebElementTests\Scripts\CreateButtonNotClickableFor3Seconds.js" />
-    <Content Include="WebElementTests\Scripts\CreateDisabledButton.js" />
-    <Content Include="WebElementTests\Scripts\CreateButtonDisabledFor3Seconds.js" />
-    <Content Include="WebElementTests\Scripts\CreateButtonAfter3Seconds.js" />
-    <Content Include="WebElementTests\Scripts\CreateParentDivAndInside2Buttons.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonNotVisible.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonVisibleAfter3Seconds.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonNotClickableAtPoint.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonNotClickableFor3Seconds.js" />
+    <Content Include="IntegrationTests\Scripts\CreateDisabledButton.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonDisabledFor3Seconds.js" />
+    <Content Include="IntegrationTests\Scripts\CreateButtonAfter3Seconds.js" />
+    <Content Include="IntegrationTests\Scripts\CreateParentDivAndInside2Buttons.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

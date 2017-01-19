@@ -8,9 +8,10 @@ namespace StableSelenium
     {
         public static StableWebElement ToStableWebElement(this IWebElement element,By by,StableWebDriver driver)
         {
-            if (element is StableWebElement)
-                return element as StableWebElement;
-            return new StableWebElement(element, by, driver);
+            var stbElem = element as StableWebElement;
+            if (stbElem == null)
+                stbElem = new StableWebElement(element, by, driver);
+            return stbElem;
         }
 
         public static ReadOnlyCollection<StableWebElement> ToStableWebElementCollection(this ReadOnlyCollection<IWebElement> elements, By by, StableWebDriver driver)
