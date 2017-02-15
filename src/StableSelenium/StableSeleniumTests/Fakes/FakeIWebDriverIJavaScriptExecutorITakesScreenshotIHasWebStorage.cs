@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace StableSelenium.Tests.Fakes
 {
-    internal class FakeIWebDriverIJavaScriptExecutorITakesScreenshotIHasWebStorage : IWebDriver, IJavaScriptExecutor, ITakesScreenshot, IHasWebStorage,IMock
+    internal class FakeDriverWithWebStorage : IWebDriver, IJavaScriptExecutor, ITakesScreenshot, IHasWebStorage,IMock
     {
         public MethodBase LastMethodCalled { get; private set; }
 

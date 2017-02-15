@@ -24,7 +24,7 @@ namespace StableSelenium.Tests.IntegrationTests
             
             //Without the framework it should throw exception
             var ex = Assert.Throws<InvalidOperationException>(() => Driver.FindElement(By.CssSelector("button")).WrappedElement.Click());
-            Assert.IsTrue(ex.Message.Contains("Element is not clickable at point"));
+            Assert.IsTrue(ex.Message.Contains("is not clickable at point"));
             //The framework should not throw exception
             Driver.FindElement(By.CssSelector("button")).Click();
 
@@ -94,7 +94,7 @@ namespace StableSelenium.Tests.IntegrationTests
             var ex = Assert.Throws<InvalidOperationException>(
                 () => Driver.FindElement(By.CssSelector("button")).Click());
 
-            Assert.IsTrue(ex.Message.Contains("Element is not clickable at point"), ex.Message);
+            Assert.IsTrue(ex.Message.Contains("is not clickable at point"), ex.Message);
             Assert.IsTrue(ex.Message.Contains("Other element would receive the click"), ex.Message);
         }
 

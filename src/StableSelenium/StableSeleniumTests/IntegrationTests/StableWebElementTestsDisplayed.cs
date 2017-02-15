@@ -50,11 +50,5 @@ namespace StableSelenium.Tests.IntegrationTests
             Assert.IsFalse(element.Displayed);
         }
 
-        [Test]
-        public void ByConfigurationIfFindelementWillThrowNoSuch()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

@@ -138,8 +138,7 @@ namespace StableSelenium.Tests.Fakes
 
         ReadOnlyCollection<IWebElement> ISearchContext.FindElements(By by)
         {
-            LastMethodCalled = MethodBase.GetCurrentMethod();
-            return null;
+            return FindElements(by);
         }
     }
 

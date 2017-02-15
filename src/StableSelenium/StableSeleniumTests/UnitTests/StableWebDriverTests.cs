@@ -1,19 +1,27 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using StableSelenium.Tests.Fakes;
 using StableSelenium.Tests.TestUtils;
+using NSubstitute;
 using System;
-
+using OpenQA.Selenium.Html5;
 
 namespace StableSelenium.Tests.UnitTests
 {
     [TestFixture, Category("UnitTests")]
     public class StableWebDriverTests  : TestBase
     {
+        private IWebDriver CreateDefaultFakeDriver()
+        {
+            return Substitute.For<IWebDriver, IJavaScriptExecutor, ITakesScreenshot>();
+        }
+
         [Test]
         public void Ctor_WhenCalledWithoutConfiguration_ShouldCreateDefaultConfiguration()
         {
-            var driver = new StableWebDriver(new FakeIWebDriverIJavaScriptExecutorITakesScreenshot());
+            var fakeDriver = CreateDefaultFakeDriver();
+            var driver = new StableWebDriver(fakeDriver);
             var defaultConfig = new DriverConfiguration();
             Assert.AreEqual(defaultConfig.ImplicitlyWaitTimeout, driver.DriverConfiguration.ImplicitlyWaitTimeout);
             Assert.AreEqual(defaultConfig.TimeoutToRetryClickIfFailed, driver.DriverConfiguration.TimeoutToRetryClickIfFailed);
@@ -25,30 +33,34 @@ namespace StableSelenium.Tests.UnitTests
         {
             var config = new DriverConfiguration();
             config.ImplicitlyWaitTimeout = TimeSpan.FromDays(2);
-            var driver = new StableWebDriver(new FakeIWebDriverIJavaScriptExecutorITakesScreenshot(), config);
+            var driver = new StableWebDriver(CreateDefaultFakeDriver(), config);
             Assert.AreEqual(config.ImplicitlyWaitTimeout, driver.DriverConfiguration.ImplicitlyWaitTimeout);
         }
 
         [Test]
         public void Ctor_WhenPassingDriverThatDoesNotImplementIJavaScriptExecutor_ShouldThrowException()
         {
-            Assert.Throws<InvalidOperationException>(
+            IWebDriver fakeDriver = Substitute.For<IWebDriver>();
+               
+            var ex = Assert.Throws<InvalidOperationException>(
                 () =>
                 {
-                    var driver = new FakeIWebDriverOnly();
-                    var stdriver = new StableWebDriver(driver);
+                    var stdriver = new StableWebDriver(fakeDriver);
                 });
+
+            Assert.IsTrue(ex.Message.Contains("must implement interface IJavaScriptExecutor"));
         }
 
 
         [Test]
         public void Ctor_WhenPassingDriverThatDoesNotImplementITakesScreenshot_ShouldThrowException()
         {
+            var fakeDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
+
             Assert.Throws<InvalidOperationException>(
                 () =>
                 {
-                    var driver = new FakeIWebDriverNotITakesScreenshot();
-                    var stdriver = new StableWebDriver(driver);
+                    var stdriver = new StableWebDriver(fakeDriver);
                 });
         }
 
@@ -56,26 +68,34 @@ namespace StableSelenium.Tests.UnitTests
         [Test]
         public void HasWebStorage_WhenWrappedDriverWithoutWebStorage_ShouldReturnFalse()
         {
-            var driver = new StableWebDriver(new FakeIWebDriverIJavaScriptExecutorITakesScreenshot());
+            var fakeDriver = CreateDefaultFakeDriver();
+            var driver = new StableWebDriver(fakeDriver);
             Assert.False(Driver.HasWebStorage);
         }
 
         [Test]
         public void HasWebStorage_WhenWrappedDriverWithWebStorage_ShouldReturnTrue()
         {
-            var dr = new FakeIWebDriverIJavaScriptExecutorITakesScreenshotIHasWebStorage();
-            var driver = new StableWebDriver(dr);
-            Assert.True(driver.HasWebStorage);
+            var fakeDriverWithWebStorage = Substitute.For(new[] { typeof(IWebDriver), typeof(ITakesScreenshot), typeof(IJavaScriptExecutor), typeof(IHasWebStorage) },new object[] {});
+            (fakeDriverWithWebStorage as IHasWebStorage).HasWebStorage.Returns(true);
+            var driver = new StableWebDriver(fakeDriverWithWebStorage as IWebDriver);
+
+            var hasWebStorage = driver.HasWebStorage;
+
+            Assert.True(hasWebStorage);
         }
+
 
 
         [Test]
         public void DriverAs_WhenWrappedDriverCanBeCastedToAnotherType_ShouldReturnCastedObject()
         {
-            var driver = new FakeIWebDriverIFindsById();
-            var stableWD = new StableWebDriver(driver);
-            Assert.IsNull(stableWD as IFindsById);
-            Assert.IsNotNull(stableWD.DriverAs<IFindsById>());
+            var driver = Substitute.For(new Type[] { typeof(IFindsById), typeof(IWebDriver), typeof(IJavaScriptExecutor), typeof(ITakesScreenshot) },null);
+            var stableWD = new StableWebDriver(driver as IWebDriver);
+
+            IFindsById findsById = stableWD.DriverAs<IFindsById>();
+            
+            Assert.IsNotNull(findsById);
         }
 
 

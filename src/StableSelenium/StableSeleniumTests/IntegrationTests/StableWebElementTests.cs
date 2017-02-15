@@ -5,24 +5,24 @@ using StableSelenium.Tests.TestUtils;
 namespace StableSelenium.Tests.IntegrationTests
 {
     [Category("IntegrationTests")]
-    [UseRealBrowser]
     [TestFixture]
     public class StableWebElementTests : TestBase
     {
 
+        [UseMockBrowser]
         [Test]
-        public void By_WhenCallledOnSingleElement_ShouldReturnTheLocatorOfTheCurrentElement()
+        public void By_SingleElement_ReturnCorrectLocator()
         {
             var element = Driver.FindElement(By.CssSelector("body"));
             Assert.AreEqual("By.CssSelector: body", element.By.ToString());
         }
 
+        [UseMockBrowser]
         [Test]
-        public void By_WhenCalledOnWebElementFromList_ShouldReturnTheLocatorOfTheCurrentElement()
+        public void By_MultipleElements_ReturnCorrectLocator()
         {
-            InjectHtmlWithMultipleElements();
             var elements = Driver.FindElements(By.CssSelector("div"));
-            Assert.AreEqual("By.CssSelector: div", elements[1].By.ToString());
+            Assert.AreEqual("By.CssSelector: div", elements[0].By.ToString());
         }
 
         [Test]
